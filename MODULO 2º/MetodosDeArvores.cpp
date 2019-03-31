@@ -2,9 +2,9 @@
 void inserir(int valor){
     NoArvore *noArvore = new NoArvore(valor);
     if (raiz == NULL){
-        raiz = novo;
+        raiz = noArvore;
     } else {
-        
+
         NoArvore *auxNoArvore = raiz;  
         while(auxNoArvore != NULL && auxNoArvore->valor != valor){
             if (auxNoArvore->valor > valor){
