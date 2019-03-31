@@ -4,15 +4,17 @@ void inserir(int valor){
     if (raiz == NULL){
         raiz = novo;
     } else {
+        
         NoArvore *auxNoArvore = raiz;  
-        while(auxNoArvore != NULL && auxNoArvore->valor != i){
+        while(auxNoArvore != NULL && auxNoArvore->valor != valor){
             if (auxNoArvore->valor > valor){
                 if (auxNoArvore->esquerda == NULL){
                     auxNoArvore->esquerda = noArvore;
                 } else {
                     auxNoArvore = auxNoArvore->esquerda;
                 }
-            } else{
+
+            } else {
                 if (auxNoArvore->direita == NULL){
                     auxNoArvore->direita = noArvore;
                 } else {
