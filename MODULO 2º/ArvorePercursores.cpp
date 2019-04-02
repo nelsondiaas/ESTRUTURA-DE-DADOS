@@ -65,8 +65,7 @@ class Arvore{
 class Pilha{
     public:
         NoPilha *topo = NULL;
-        Arvore *arvore = new Arvore();
-
+    
         bool vazia(){
             if (this->topo == NULL){
                 return true;
@@ -95,7 +94,7 @@ class Pilha{
             }
         }
         
-         void inOrdem(){
+         void inOrdem(Arvore *arvore){
             NoArvore *auxNoArvore = arvore->raiz;
             bool controle = false;
 
@@ -115,7 +114,7 @@ class Pilha{
             }
         }
 
-        void preOrdem(){
+        void preOrdem(Arvore *arvore){
             NoArvore *auxNoArvore = arvore->raiz;
             bool controle = false;
 
@@ -135,7 +134,7 @@ class Pilha{
             }
         }
 
-        void posOrdem(){
+        void posOrdem(Arvore *arvore){
             NoArvore *auxNoArvore = arvore->raiz;
             bool controle = false;
 
@@ -169,27 +168,27 @@ class Pilha{
 
 int main()
 {   
-    
+    Arvore *arvore = new Arvore();
     Pilha *pilha = new Pilha();
     
-    pilha->arvore->inserir(pilha->arvore->raiz, 8);
-    pilha->arvore->inserir(pilha->arvore->raiz, 3);
-    pilha->arvore->inserir(pilha->arvore->raiz, 1);
-    pilha->arvore->inserir(pilha->arvore->raiz, 6);
-    pilha->arvore->inserir(pilha->arvore->raiz, 4);
-    pilha->arvore->inserir(pilha->arvore->raiz, 7);
-    pilha->arvore->inserir(pilha->arvore->raiz, 10);
-    pilha->arvore->inserir(pilha->arvore->raiz, 14);
-    pilha->arvore->inserir(pilha->arvore->raiz, 13);
+    arvore->inserir(arvore->raiz, 8);
+    arvore->inserir(arvore->raiz, 3);
+    arvore->inserir(arvore->raiz, 1);
+    arvore->inserir(arvore->raiz, 6);
+    arvore->inserir(arvore->raiz, 4);
+    arvore->inserir(arvore->raiz, 7);
+    arvore->inserir(arvore->raiz, 10);
+    arvore->inserir(arvore->raiz, 14);
+    arvore->inserir(arvore->raiz, 13);
     
     cout << "Pre-Ordem(RED): ";
-    pilha->preOrdem();
+    pilha->preOrdem(arvore);
 
     cout << "\nIn-Ordem(ERD): ";
-    pilha->inOrdem();
+    pilha->inOrdem(arvore);
     
     cout << "\nPos-Ordem(EDR): ";
-    pilha->posOrdem();
+    pilha->posOrdem(arvore);
 
 }
 
