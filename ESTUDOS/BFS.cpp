@@ -34,6 +34,10 @@ class FilaDinamica{
             }
         }
 
+        int primeiroDaFila(){
+            return this->inicio->dados;
+        }
+
         void popInicio(){
             NoFila *aux;
             aux = inicio;
@@ -60,40 +64,41 @@ class FilaDinamica{
         }       
 };
 
-class Grafico{
+class Grafo{
     public:
-        int vertices;
-        list<int> *adjacentes;
+        int vertices; // número de vértices
+        list<int> *adjacentes; // ponteiro para um array contendo as listas de adjacências
 
-        Grafico(int vertice){
+        Grafo(int vertice){ // Construtor
             this->vertices = vertice;
-            this->adjacentes = new list<int>[vertice];
+            this->adjacentes = new list<int>[vertice]; // cria as listas
         }
 
-        void adicionarBorda(int vertice, int w){
-            this->adjacentes[vertice].push_back(w);
+        void adicionarAresta(int vertice1, int vertice2){ // adiciona uma aresta no grafo
+            this->adjacentes[vertice1].push_back(vertice2); // adiciona vértice v2 à lista de vértices adjacentes de v1
         }
 
+        /*faz uma BFS a partir de um vértice*/
         void BFS(int vertice){
-            bool *visitado = new bool[this->vertices];
+            bool visitado[this->vertices]; // vetor de visitados
             for (int i=0; i < this->vertices; i++){
                 visitado[i] = false;
             }
             FilaDinamica *fila = new FilaDinamica();
-            visitado[vertice] = true;
+            visitado[vertice] = true; // marca como visitado
             fila->push(vertice);
 
-            list<int>::iterator i; 
+            list<int>::iterator interador; 
 
             while(fila->inicio != NULL){
-                vertice = fila->inicio->dados;
-                cout << vertice << " ";
+                vertice = fila->primeiroDaFila();
+                cout << "Visitando vertice: " << vertice << "...\n";
                 fila->popInicio();
 
-                for (i = adjacentes[vertice].begin(); i != adjacentes[vertice].end(); ++i){
-                    if (visitado[*i] != true){
-                        visitado[*i] = true;
-                        fila->push(*i);
+                for (interador = adjacentes[vertice].begin(); interador != adjacentes[vertice].end(); ++interador){
+                    if (visitado[*interador] != true){
+                        visitado[*interador] = true; // marca como visitado
+                        fila->push(*interador); // insere na fila
                     }
                 }
             }
@@ -104,18 +109,35 @@ class Grafico{
 
 int main()
 {
-    Grafico *grafico = new Grafico(4);
+    Grafo *grafo = new Grafo(8);
 
-    grafico->adicionarBorda(0, 1);
-    grafico->adicionarBorda(0, 2);
-    grafico->adicionarBorda(1, 2);
-    grafico->adicionarBorda(2, 0);
-    grafico->adicionarBorda(2, 3);
-    grafico->adicionarBorda(3, 3);
+    grafo->adicionarAresta(0, 1);
+    grafo->adicionarAresta(0, 2);
+    grafo->adicionarAresta(1, 3);
+    grafo->adicionarAresta(1, 4);
+    grafo->adicionarAresta(2, 5);
+    grafo->adicionarAresta(2, 6);
+    grafo->adicionarAresta(6, 7);
 
-    cout << "Apartir do vertice 2: ";
-    grafico->BFS(2);
+    grafo->BFS(0);
 
 }
+
+/*
+              GRAFO
+
+                0
+              /   \
+             1     2
+            / \   /  \
+           3   4 5    6
+                      |
+                      7
+
+    BFS:  
+    Intuitivamente, você começa pelo vértice raiz e explora todos os vértices vizinhos. 
+    Então, para cada um desses vértices mais próximos, exploramos os seus vértices vizinhos 
+    inexplorados e assim por diante, até que ele encontre o alvo da busca.
+*/
 
 
