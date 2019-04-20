@@ -109,30 +109,33 @@ class Grafo{
 
 int main()
 {
-    Grafo *grafo = new Grafo(8);
+    Grafo *grafo = new Grafo(20);
 
-    grafo->adicionarAresta(0, 1);
-    grafo->adicionarAresta(0, 2);
+    grafo->adicionarAresta(1, 2);
+    grafo->adicionarAresta(1, 3);
     grafo->adicionarAresta(1, 3);
     grafo->adicionarAresta(1, 4);
     grafo->adicionarAresta(2, 5);
-    grafo->adicionarAresta(2, 6);
-    grafo->adicionarAresta(6, 7);
+    grafo->adicionarAresta(3, 6);
+    grafo->adicionarAresta(3, 7);
+    grafo->adicionarAresta(4, 8);
+    grafo->adicionarAresta(5, 9);
+    grafo->adicionarAresta(6, 10);
 
-    grafo->BFS(0);
+    grafo->BFS(1);
 
 }
 
 /*
               GRAFO
-
-                0
-              /   \
-             1     2
-            / \   /  \
-           3   4 5    6
-                      |
-                      7
+              
+                1
+              / | \
+             2  3  4
+            /  / \  \
+           5  6   7  8
+          /   |
+         9    10
 
     BFS:  
     Intuitivamente, você começa pelo vértice raiz e explora todos os vértices vizinhos. 
