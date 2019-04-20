@@ -88,14 +88,19 @@ class ListaDinamica{
             if (vazia()){
                 return false;
             }else{
-                while(aux->proximo != NULL){
-                    anterior = aux;
-                    aux = aux->proximo;
+                while(aux != NULL){
+                anterior = aux;
+                aux = aux->proximo;
+                if (aux->proximo == NULL){
+                    break;
                 }
-                anterior->proximo = aux->proximo;
-                delete(aux);
-                contador--;
-                return true;
+            }
+            fim = anterior;
+            fim->proximo = NULL;
+            anterior = NULL;
+            aux = NULL;
+            delete(anterior, aux); 
+            return true; 
             }
         }
 };
